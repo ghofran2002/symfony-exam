@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h2>Liste des produits</h2>
+
+<div class="accordion" id="produitAccordion">
+    {% for produit in produits %}
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="heading{{ loop.index }}">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ loop.index }}">
+                    {{ produit.nom }}
+                </button>
+            </h2>
+            <div id="collapse{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#produitAccordion">
+                <div class="accordion-body">
+                    <strong>Prix:</strong> {{ produit.prix }} €<br>
+                    <strong>Description:</strong> {{ produit.description }}<br>
+                    <small>Ajouté le {{ produit.createdAt|date('d/m/Y') }}</small>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <p>Aucun produit trouvé.</p>
+    {% endfor %}
+</div>
+{% endblock %}
